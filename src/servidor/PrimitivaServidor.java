@@ -8,11 +8,13 @@ public class PrimitivaServidor {
 		String respuesta;
 		do {
 			linea = canal.leerCombinacion();
-			respuesta = canal.comprobarBoleto ();
-			canal.enviarRespuesta (respuesta);
-		} while (!linea.equals("FIN"));
+			// Si el cliente nos pasa una linea indicando el final, no se ejecutará más código y el servidor parará
+			if(!linea.equalsIgnoreCase("FIN")) {
+				respuesta = canal.comprobarBoleto(linea);
+				canal.enviarRespuesta(respuesta);
+			}
+		} while (!linea.equalsIgnoreCase("FIN"));
 		canal.finSesion();
-		
 	}
 
 }
